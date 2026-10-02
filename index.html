@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskPulse OS - Modern Engineering Task Manager & Productivity Dashboard">
+  <title>TaskPulse OS | Developer Task Engine</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <span class="logo-bracket">[</span>
+        <h1 class="logo-title">TaskPulse<span>.OS</span></h1>
+        <span class="logo-bracket">]</span>
+      </div>
+      <div class="header-right">
+        <button id="export-btn" class="btn-icon" title="Export tasks as JSON">Export JSON ↓</button>
+        <button id="clear-completed-btn" class="btn-icon danger" title="Clear all finished tasks">Clear Done</button>
+      </div>
+    </header>
+
+    <!-- Productivity Telemetry Cards -->
+    <section class="telemetry-grid">
+      <div class="metric-card">
+        <span class="metric-label">TOTAL TASKS</span>
+        <span id="total-count" class="metric-val">0</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">COMPLETED</span>
+        <span id="completed-count" class="metric-val text-green">0</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">PENDING</span>
+        <span id="pending-count" class="metric-val text-amber">0</span>
+      </div>
+      <div class="metric-card progress-metric">
+        <div class="progress-info">
+          <span class="metric-label">VELOCITY</span>
+          <span id="progress-percent" class="metric-val">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div id="progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task Creation Form -->
+    <section class="creator-card">
+      <form id="task-form" class="task-form">
+        <div class="input-main">
+          <input type="text" id="task-input" placeholder="Add a new engineering task or roadmap milestone..." required autocomplete="off">
+        </div>
+        <div class="input-controls">
+          <select id="priority-select" aria-label="Task Priority">
+            <option value="high">🔴 High Priority</option>
+            <option value="medium" selected>🟡 Medium Priority</option>
+            <option value="low">🟢 Low Priority</option>
+          </select>
+
+          <select id="category-select" aria-label="Task Category">
+            <option value="Dev" selected>💻 Dev / Code</option>
+            <option value="Roadmap">🗺️ Roadmap</option>
+            <option value="Interview">💼 Career</option>
+            <option value="General">📌 General</option>
+          </select>
+
+          <button type="submit" class="btn-add">+ Add Task</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section class="filter-strip">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search tasks by keyword...">
+      </div>
+      <div class="filter-pills">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="active">Active</button>
+        <button class="pill" data-filter="completed">Completed</button>
+      </div>
+    </section>
+
+    <!-- Task List Container -->
+    <main class="list-container">
+      <ul id="task-list" class="task-list">
+        <!-- Injected dynamically via app.js -->
+      </ul>
+
+      <!-- Empty State Indicator -->
+      <div id="empty-state" class="empty-state">
+        <div class="empty-icon">📂</div>
+        <h3>No Tasks Found</h3>
+        <p>Add your next milestone or adjust your search filter above.</p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Data persisted locally via <code>window.localStorage</code> • Designed by Deep Purohit</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
